@@ -22,6 +22,7 @@ __metadata:
     eslint-plugin-vitest: 0.3.1
     shx: 0.3.4
     typescript: 5.2.2
+    vite: 4.4.9
     vite-tsconfig-paths: 4.2.1
     vitest: 0.34.4
   languageName: unknown
@@ -4699,7 +4700,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^3.0.0 || ^4.0.0":
+"vite@npm:4.4.9, vite@npm:^3.0.0 || ^4.0.0":
   version: 4.4.9
   resolution: "vite@npm:4.4.9"
   dependencies:
