@@ -370,7 +370,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jujulego/event-tree@npm:^4.1.0":
+"@jujulego/event-tree@npm:^4.1.0, @jujulego/event-tree@npm:^4.1.1":
   version: 4.1.1
   resolution: "@jujulego/event-tree@npm:4.1.1"
   dependenciesMeta:
@@ -416,6 +416,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@jujulego/logger@workspace:."
   dependencies:
+    "@jujulego/event-tree": ^4.1.1
     "@jujulego/jill": 2.3.2
     "@microsoft/eslint-formatter-sarif": 3.0.0
     "@rollup/plugin-swc": 0.2.0

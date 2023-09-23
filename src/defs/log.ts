@@ -4,4 +4,6 @@ import { LogLevel } from './log-levels.js';
 export interface Log {
   level: LogLevel;
   message: string;
+
+  error?: Error | undefined;
 }
