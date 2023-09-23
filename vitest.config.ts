@@ -16,6 +16,6 @@ export default defineConfig({
   },
   plugins: [
     tsconfigPaths(),
-    swc()
+    (swc as unknown as typeof swc.default)()
   ]
 });
