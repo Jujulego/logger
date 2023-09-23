@@ -9,3 +9,8 @@ export enum LogLevel {
 
 // Types
 export type LogLevelKey = keyof typeof LogLevel;
+
+// Utils
+export function parseLogLevel(level: LogLevel | LogLevelKey): LogLevel {
+  return typeof level === 'string' ? LogLevel[level] : level;
+}
