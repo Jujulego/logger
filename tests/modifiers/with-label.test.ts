@@ -2,14 +2,14 @@ import { vi } from 'vitest';
 
 import { LogLevel } from '@/src/defs/log-levels.js';
 import { logger$ } from '@/src/logger.js';
-import { injectLabel } from '@/src/modifiers/inject-label.js';
+import { withLabel } from '@/src/modifiers/with-label.js';
 
 // Tests
-describe('injectLabel', () => {
+describe('withLabel', () => {
   it('should inject label to each emitted logs', () => {
     const spy = vi.fn();
 
-    const logger = logger$(injectLabel('test'));
+    const logger = logger$(withLabel('test'));
     logger.subscribe(spy);
 
     logger.info('life is 42');
@@ -21,12 +21,12 @@ describe('injectLabel', () => {
     });
   });
 
-  it('should not inject parent label has modifier is lazy (by default)', () => {
+  it('should not inject label if one is already present', () => {
     const spy = vi.fn();
 
     const logger = logger$(
-      injectLabel('first'),
-      injectLabel('second')
+      withLabel('first'),
+      withLabel('second')
     );
     logger.subscribe(spy);
 
@@ -39,12 +39,12 @@ describe('injectLabel', () => {
     });
   });
 
-  it('should inject parent label has modifier is force', () => {
+  it('should force inject "second" label', () => {
     const spy = vi.fn();
 
     const logger = logger$(
-      injectLabel('first'),
-      injectLabel('second', true)
+      withLabel('first'),
+      withLabel('second', true)
     );
     logger.subscribe(spy);
 

@@ -1,11 +1,11 @@
 import { Log, LogModifier } from '../defs/index.js';
 
 // Types
-export type InjectLabel<L extends Log> = L & { label: string };
-export type InjectLabelModifier<L extends Log> = LogModifier<L, InjectLabel<L>>;
+export type WithLabel<L extends Log> = L & { label: string };
+export type WithLabelModifier<L extends Log> = LogModifier<L, WithLabel<L>>;
 
 // Utils
-export function hasLabel<L extends Log>(log: L): log is InjectLabel<L> {
+export function hasLabel<L extends Log>(log: L): log is WithLabel<L> {
   return 'label' in log;
 }
 
@@ -16,6 +16,6 @@ export function hasLabel<L extends Log>(log: L): log is InjectLabel<L> {
  * @param label Label to inject
  * @param force If false label won't be injected if log already has one
  */
-export function injectLabel<L extends Log>(label: string, force = false): InjectLabelModifier<L> {
+export function withLabel<L extends Log>(label: string, force = false): WithLabelModifier<L> {
   return (log: L) => !force && hasLabel(log) ? log : Object.assign(log, { label });
 }
