@@ -14,5 +14,5 @@ export function hasTimestamp<L extends Log>(log: L): log is WithTimestamp<L> {
  * Injects current timestamp in log record
  */
 export function withTimestamp<L extends Log>(): WithTimestampModifier<L> {
-  return (log: L) => hasTimestamp(log) ? log : Object.assign(log, { timestamp: new Date().toISOString() });
+  return (log: L) => ({ timestamp: new Date().toISOString(), ...log });
 }

@@ -17,5 +17,5 @@ export function hasLabel<L extends Log>(log: L): log is WithLabel<L> {
  * @param force If false label won't be injected if log already has one
  */
 export function withLabel<L extends Log>(label: string, force = false): WithLabelModifier<L> {
-  return (log: L) => !force && hasLabel(log) ? log : Object.assign(log, { label });
+  return (log: L) => force ? { ...log, label } : { label, ...log };
 }
