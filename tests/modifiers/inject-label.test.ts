@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 
 import { LogLevel } from '@/src/defs/log-levels.js';
 import { logger$ } from '@/src/logger.js';
-import { injectLabel } from '@/src/modifiers/index.js';
+import { injectLabel } from '@/src/modifiers/inject-label.js';
 
 // Tests
 describe('injectLabel', () => {
