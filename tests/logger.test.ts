@@ -1,7 +1,7 @@
 import { describe, vi } from 'vitest';
 
-import { logger$ } from '@/src/logger.js';
 import { Log, LogLevel } from '@/src/defs/index.js';
+import { logger$ } from '@/src/logger.js';
 
 // Tests
 describe('logger$', () => {
@@ -16,7 +16,7 @@ describe('logger$', () => {
       // Setup child
       const childSpy = vi.fn();
 
-      const child = logger.child((log) => log);
+      const child = logger.child();
       child.subscribe(childSpy);
 
       // Test

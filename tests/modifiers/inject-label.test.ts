@@ -24,15 +24,17 @@ describe('injectLabel', () => {
   it('should not inject parent label has modifier is lazy (by default)', () => {
     const spy = vi.fn();
 
-    const logger = logger$(injectLabel('test'));
-    const child = logger.child(injectLabel('child'));
+    const logger = logger$(
+      injectLabel('first'),
+      injectLabel('second')
+    );
     logger.subscribe(spy);
 
-    child.info('life is 42');
+    logger.info('life is 42');
 
     expect(spy).toHaveBeenCalledWith({
       level: LogLevel.info,
-      label: 'child',
+      label: 'first',
       message: 'life is 42'
     });
   });
@@ -40,15 +42,17 @@ describe('injectLabel', () => {
   it('should inject parent label has modifier is force', () => {
     const spy = vi.fn();
 
-    const logger = logger$(injectLabel('test', true));
-    const child = logger.child(injectLabel('child'));
+    const logger = logger$(
+      injectLabel('first'),
+      injectLabel('second', true)
+    );
     logger.subscribe(spy);
 
-    child.info('life is 42');
+    logger.info('life is 42');
 
     expect(spy).toHaveBeenCalledWith({
       level: LogLevel.info,
-      label: 'test',
+      label: 'second',
       message: 'life is 42'
     });
   });
