@@ -1,17 +1,43 @@
 import { Observable, source$ } from '@jujulego/event-tree';
 
-import { Log, LogLevel, LogLevelKey, parseLogLevel } from './defs/index.js';
+import { Log, LogLevel, LogLevelKey, LogModifier as LM, parseLogLevel } from './defs/index.js';
 
 // Types
-export type LoggerFn<L extends Log = Log> = (log: Log) => L;
-
 export interface Logger<L extends Log = Log> extends Observable<L> {
   /**
    * Creates a child logger. Every log emitted by the children will be emitted by it's parent
-   *
-   * @param fn
    */
-  child<CL extends Log>(fn: LoggerFn<CL>): Logger<CL>;
+  child(): Logger<L>;
+
+  /**
+   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
+   */
+  child<A extends Log>(fnA: LM<Log, A>): Logger<A>;
+
+  /**
+   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
+   */
+  child<A extends Log, B extends Log>(fnA: LM<Log, A>, fnB: LM<A, B>): Logger<B>;
+
+  /**
+   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
+   */
+  child<A extends Log, B extends Log, C extends Log>(fnA: LM<Log, A>, fnB: LM<A, B>, fnC: LM<B, C>): Logger<C>;
+
+  /**
+   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
+   */
+  child<A extends Log, B extends Log, C extends Log, D extends Log>(fnA: LM<Log, A>, fnB: LM<A, B>, fnC: LM<B, C>, fnD: LM<C, D>): Logger<D>;
+
+  /**
+   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
+   */
+  child<A extends Log, B extends Log, C extends Log, D extends Log, E extends Log>(fnA: LM<Log, A>, fnB: LM<A, B>, fnC: LM<B, C>, fnD: LM<C, D>, fnE: LM<D, E>): Logger<E>;
+
+  /**
+   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
+   */
+  child(...fns: LM[]): Logger;
 
   /**
    * Logs a message with a custom level
@@ -31,18 +57,25 @@ export interface Logger<L extends Log = Log> extends Observable<L> {
 
 // Builder
 export function logger$(): Logger;
-export function logger$<L extends Log = Log>(fn: LoggerFn<L>): Logger<L>;
-export function logger$(fn: LoggerFn = (log) => log): Logger {
+export function logger$<A extends Log>(fnA: LM<Log, A>): Logger<A>;
+export function logger$<A extends Log, B extends Log>(fnA: LM<Log, A>, fnB: LM<A, B>): Logger<B>;
+export function logger$<A extends Log, B extends Log, C extends Log>(fnA: LM<Log, A>, fnB: LM<A, B>, fnC: LM<B, C>): Logger<C>;
+export function logger$<A extends Log, B extends Log, C extends Log, D extends Log>(fnA: LM<Log, A>, fnB: LM<A, B>, fnC: LM<B, C>, fnD: LM<C, D>): Logger<D>;
+export function logger$<A extends Log, B extends Log, C extends Log, D extends Log, E extends Log>(fnA: LM<Log, A>, fnB: LM<A, B>, fnC: LM<B, C>, fnD: LM<C, D>, fnE: LM<D, E>): Logger<E>;
+
+export function logger$(...fns: LM[]): Logger;
+
+export function logger$(...fns: LM[]): Logger {
   const src = source$<Log>();
 
   function emit(log: Log): void {
-    src.next(fn(log));
+    src.next(fns.reduce((acc, fn) => fn(acc), log));
   }
 
   return Object.assign(src, {
     // utils methods
-    child<CL extends Log>(childFn: LoggerFn<CL>) {
-      const child = logger$(childFn);
+    child(...childFns: LM[]) {
+      const child = logger$(...childFns);
       child.subscribe(emit);
 
       return child;
