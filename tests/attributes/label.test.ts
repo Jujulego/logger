@@ -80,4 +80,13 @@ describe('formatLabel', () => {
     expect(formatLabel()({ level: LogLevel.info, label: 'label', message: 'message' }, 'message'))
       .toBe('[label] message');
   });
+
+  it('should use fmt to format log label', () => {
+    const fmt = vi.fn((label) => `{${label}}`);
+
+    expect(formatLabel(fmt)({ level: LogLevel.info, label: 'label', message: 'message' }, 'message'))
+      .toBe('{label} message');
+
+    expect(fmt).toHaveBeenCalledWith('label');
+  });
 });

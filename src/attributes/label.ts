@@ -8,6 +8,8 @@ export interface LogLabel {
 export type WithLabel<L extends Log = Log> = L & LogLabel;
 export type WithLabelModifier<L extends Log> = LogModifier<L, WithLabel<L>>;
 
+export type LabelFormatter = (label: string) => string;
+
 // Utils
 export function hasLabel<L extends Log>(log: L): log is WithLabel<L> {
   return 'label' in log;
@@ -26,8 +28,12 @@ export function withLabel<L extends Log>(label: string, force = false): WithLabe
 
 // Formatter
 /**
- * Prepend message by squared [label]
+ * Prepend message by squared "[$label] "
+ *
+ * @param fmt callback to customize label format
  */
-export function formatLabel(): LogFormatStep<Log & Partial<LogLabel>> {
-  return (log, text) => hasLabel(log) ? `[${log.label}] ${text}` : text;
+export function formatLabel(
+  fmt: LabelFormatter = (label) => `[${label}]`
+): LogFormatStep<Log & Partial<LogLabel>> {
+  return (log, text) => hasLabel(log) ? `${fmt(log.label)} ${text}` : text;
 }
