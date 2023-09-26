@@ -1,10 +1,22 @@
 import { vi } from 'vitest';
 
+import { formatLabel, hasLabel, withLabel } from '@/src/attributes/label.js';
 import { LogLevel } from '@/src/defs/log-level.js';
 import { logger$ } from '@/src/logger.js';
-import { withLabel } from '@/src/modifiers/with-label.js';
 
 // Tests
+describe('hasLabel', () => {
+  it('should return false', () => {
+    expect(hasLabel({ level: LogLevel.info, message: 'message' }))
+      .toBe(false);
+  });
+
+  it('should return true', () => {
+    expect(hasLabel({ level: LogLevel.info, label: 'label', message: 'message' }))
+      .toBe(true);
+  });
+});
+
 describe('withLabel', () => {
   it('should inject label to each emitted logs', () => {
     const spy = vi.fn();
@@ -55,5 +67,17 @@ describe('withLabel', () => {
       label: 'second',
       message: 'life is 42'
     });
+  });
+});
+
+describe('formatLabel', () => {
+  it('should do nothing as log has no label', () => {
+    expect(formatLabel()({ level: LogLevel.info, message: 'message' }, 'message'))
+      .toBe('message');
+  });
+
+  it('should prepend message with label', () => {
+    expect(formatLabel()({ level: LogLevel.info, label: 'label', message: 'message' }, 'message'))
+      .toBe('[label] message');
   });
 });

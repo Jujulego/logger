@@ -1,24 +1,20 @@
-import { Log, LogLevel, LogTransport } from '../defs/index.js';
+import { formatLabel, formatTimestamp, LogLabel, LogTimestamp } from '../attributes/index.js';
+import { Log, LogFormat, LogLevel, LogTransport } from '../defs/index.js';
+import { logFormat } from '../log-format.js';
 
 // Types
-export interface ConsoleLog extends Log {
-  label?: string;
-  timestamp?: string;
+export type ConsoleLog = Log & Partial<LogLabel & LogTimestamp>;
+
+// Format
+export function consoleFormat(): LogFormat<ConsoleLog> {
+  return logFormat(formatLabel(), formatTimestamp());
 }
 
 // Builder
-export function toConsole(): LogTransport<ConsoleLog> {
+export function toConsole<L extends ConsoleLog>(format: LogFormat<L> = consoleFormat()): LogTransport<L> {
   return {
     next(log) {
-      let message = log.message;
-
-      if (log.label) {
-        message = `[${log.label}] ${message}`;
-      }
-
-      if (log.timestamp) {
-        message = `${log.timestamp} - ${message}`;
-      }
+      const message = format(log);
 
       switch (log.level) {
         case LogLevel.error:

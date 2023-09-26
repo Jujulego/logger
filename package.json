@@ -32,10 +32,10 @@
     "test:types": "vitest typecheck"
   },
   "dependencies": {
+    "@jujulego/aegis": "2.0.0-beta.5",
     "@jujulego/event-tree": "^4.1.1"
   },
   "devDependencies": {
-    "@jujulego/aegis": "2.0.0-beta.5",
     "@jujulego/jill": "2.3.2",
     "@microsoft/eslint-formatter-sarif": "3.0.0",
     "@rollup/plugin-swc": "0.2.0",

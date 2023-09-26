@@ -1,7 +1,11 @@
-import { Log, LogModifier } from '../defs/index.js';
+import { Log, LogFormatStep, LogModifier } from '../defs/index.js';
 
 // Types
-export type WithLabel<L extends Log> = L & { label: string };
+export interface LogLabel {
+  label: string;
+}
+
+export type WithLabel<L extends Log = Log> = L & LogLabel;
 export type WithLabelModifier<L extends Log> = LogModifier<L, WithLabel<L>>;
 
 // Utils
@@ -18,4 +22,12 @@ export function hasLabel<L extends Log>(log: L): log is WithLabel<L> {
  */
 export function withLabel<L extends Log>(label: string, force = false): WithLabelModifier<L> {
   return (log: L) => force ? { ...log, label } : { label, ...log };
+}
+
+// Formatter
+/**
+ * Prepend message by squared [label]
+ */
+export function formatLabel(): LogFormatStep<Log & Partial<LogLabel>> {
+  return (log, text) => hasLabel(log) ? `[${log.label}] ${text}` : text;
 }
