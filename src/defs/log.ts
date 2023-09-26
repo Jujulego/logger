@@ -1,4 +1,4 @@
-import { LogLevel } from './log-levels.js';
+import { LogLevel } from './log-level.js';
 
 // Interface
 export interface Log {

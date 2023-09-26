@@ -1,59 +1,6 @@
-import { Observable, source$ } from '@jujulego/event-tree';
+import { source$ } from '@jujulego/event-tree';
 
-import { Log, LogLevel, LogLevelKey, LogModifier as LM, parseLogLevel } from './defs/index.js';
-
-// Types
-export interface Logger<L extends Log = Log> extends Observable<L> {
-  /**
-   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
-   */
-  child(): Logger<L>;
-
-  /**
-   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
-   */
-  child<A extends Log>(fnA: LM<Log, A>): Logger<A>;
-
-  /**
-   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
-   */
-  child<A extends Log, B extends Log>(fnA: LM<Log, A>, fnB: LM<A, B>): Logger<B>;
-
-  /**
-   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
-   */
-  child<A extends Log, B extends Log, C extends Log>(fnA: LM<Log, A>, fnB: LM<A, B>, fnC: LM<B, C>): Logger<C>;
-
-  /**
-   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
-   */
-  child<A extends Log, B extends Log, C extends Log, D extends Log>(fnA: LM<Log, A>, fnB: LM<A, B>, fnC: LM<B, C>, fnD: LM<C, D>): Logger<D>;
-
-  /**
-   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
-   */
-  child<A extends Log, B extends Log, C extends Log, D extends Log, E extends Log>(fnA: LM<Log, A>, fnB: LM<A, B>, fnC: LM<B, C>, fnD: LM<C, D>, fnE: LM<D, E>): Logger<E>;
-
-  /**
-   * Creates a child logger. Every log emitted by the children will be emitted by it's parent
-   */
-  child(...fns: LM[]): Logger;
-
-  /**
-   * Logs a message with a custom level
-   *
-   * @param level
-   * @param message
-   * @param error
-   */
-  log(level: LogLevel | LogLevelKey, message: string, error?: Error): void;
-
-  debug(message: string): void;
-  verbose(message: string): void;
-  info(message: string): void;
-  warning(message: string, error?: Error): void;
-  error(message: string, error?: Error): void;
-}
+import { Log, Logger, LogLevel, LogLevelKey, LogModifier as LM, parseLogLevel } from './defs/index.js';
 
 // Builder
 export function logger$(): Logger;

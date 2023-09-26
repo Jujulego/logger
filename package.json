@@ -32,6 +32,7 @@
     "test:types": "vitest typecheck"
   },
   "dependencies": {
+    "@jujulego/aegis": "2.0.0-beta.5",
     "@jujulego/event-tree": "^4.1.1"
   },
   "devDependencies": {
