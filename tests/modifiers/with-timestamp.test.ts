@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 
-import { LogLevel } from '@/src/defs/log-levels.js';
+import { LogLevel } from '@/src/defs/log-level.js';
 import { logger$ } from '@/src/logger.js';
 import { withTimestamp } from '@/src/modifiers/with-timestamp.js';
 

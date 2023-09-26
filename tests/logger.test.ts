@@ -1,6 +1,7 @@
 import { describe, vi } from 'vitest';
 
-import { Log, LogLevel } from '@/src/defs/index.js';
+import { Log } from '@/src/defs/log.js';
+import { LogLevel } from '@/src/defs/log-level.js';
 import { logger$ } from '@/src/logger.js';
 
 // Tests
