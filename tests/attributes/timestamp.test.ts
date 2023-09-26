@@ -3,7 +3,6 @@ import { vi } from 'vitest';
 import { formatTimestamp, hasTimestamp, withTimestamp } from '@/src/attributes/timestamp.js';
 import { LogLevel } from '@/src/defs/log-level.js';
 import { logger$ } from '@/src/logger.js';
-import { formatLabel } from '@/src/attributes/index.js';
 
 // Tests
 beforeEach(() => {
