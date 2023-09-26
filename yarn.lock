@@ -370,6 +370,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jujulego/aegis@npm:2.0.0-beta.5":
+  version: 2.0.0-beta.5
+  resolution: "@jujulego/aegis@npm:2.0.0-beta.5"
+  dependencies:
+    "@jujulego/event-tree": ^4.1.1
+    "@jujulego/utils": ^2.0.0
+  dependenciesMeta:
+    vitest@0.34.5:
+      unplugged: true
+  checksum: a7cb6086a92a8b2e2d2dc2b1feacca516809bed4a63fcbe56907611719e182ab73b65b00c015cca7de7729a0c27f25cd44263c9770834bcebca42e7316d7fb88
+  languageName: node
+  linkType: hard
+
 "@jujulego/event-tree@npm:^4.1.0, @jujulego/event-tree@npm:^4.1.1":
   version: 4.1.1
   resolution: "@jujulego/event-tree@npm:4.1.1"
@@ -416,6 +429,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@jujulego/logger@workspace:."
   dependencies:
+    "@jujulego/aegis": 2.0.0-beta.5
     "@jujulego/event-tree": ^4.1.1
     "@jujulego/jill": 2.3.2
     "@microsoft/eslint-formatter-sarif": 3.0.0
