@@ -1,5 +1,4 @@
-import { Log, LogTransport } from '../defs/index.js';
-import { LogLevel } from '../defs/log-level.js';
+import { Log, LogLevel, LogTransport } from '../defs/index.js';
 
 // Types
 export interface ConsoleLog extends Log {
