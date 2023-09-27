@@ -1,17 +1,20 @@
+import { qfun, qprop, QuickFun } from '@jujulego/quick-tag';
+
 import { LogLabel, LogTimestamp } from '../attributes/index.js';
 import { Log, LogLevel, LogTransport } from '../defs/index.js';
-import { LogArg, logFormat, optional } from '../log-format.js';
 
 // Types
 export type ConsoleLog = Log & Partial<LogLabel & LogTimestamp>;
 
 // Format
-const consoleFormat = logFormat<ConsoleLog>`#?timestamp:${optional('timestamp')} - ?##?label:[${optional('label')}] ?#${'message'}`;
+const defaultFormat = qfun<ConsoleLog>`#?:${qprop('timestamp')}${qprop('timestamp')} - ?##?:${qprop('label')}[${qprop('label')}] ?#${qprop('message')}`;
 
 // Builder
-export function toConsole<L extends Log = ConsoleLog>(strings?: TemplateStringsArray, ...args: (keyof L | LogArg<L>)[]): LogTransport<L> {
-  const format = strings ? logFormat(strings, ...args) : consoleFormat;
+export function toConsole(): LogTransport<ConsoleLog>;
 
+export function toConsole<L extends Log>(format: QuickFun<L>): LogTransport<L>;
+
+export function toConsole(format: QuickFun<Log> = defaultFormat): LogTransport<Log> {
   return {
     next(log) {
       const message = format(log);
