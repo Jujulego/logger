@@ -99,6 +99,17 @@ describe('logger$', () => {
       expect(spy).toHaveBeenCalledWith({ level: LogLevel[level], message: 'test' });
     });
 
+    it(`should emit a ${level} formatted log`, () => {
+      const spy = vi.fn();
+
+      const logger = logger$();
+      logger.subscribe(spy);
+
+      logger[level]`life=${42}`;
+
+      expect(spy).toHaveBeenCalledWith({ level: LogLevel[level], message: 'life=42' });
+    });
+
     it.runIf(LogLevel[level] >= LogLevel.warning)(`should emit a ${level} log with an error`, () => {
       const spy = vi.fn();
       const error = new Error('Failed !');
