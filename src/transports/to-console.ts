@@ -7,7 +7,7 @@ import { Log, LogLevel, LogTransport } from '../defs/index.js';
 export type ConsoleLog = Log & Partial<LogLabel & LogTimestamp>;
 
 // Format
-const defaultFormat = qfun<ConsoleLog>`#?:${qprop('timestamp')}${qprop('timestamp')} - ?##?:${qprop('label')}[${qprop('label')}] ?#${qprop('message')}`;
+const defaultFormat = qfun<ConsoleLog>`#?:${qprop('timestamp')}#$ - ?##?:${qprop('label')}[#$] ?#${qprop('message')}`;
 
 // Builder
 export function toConsole(): LogTransport<ConsoleLog>;

@@ -1,4 +1,5 @@
 import { Observable } from '@jujulego/event-tree';
+import { QuickConst } from '@jujulego/quick-tag';
 
 import { Log } from './log.js';
 import { LogLevel, LogLevelKey } from './log-level.js';
@@ -54,9 +55,19 @@ export interface Logger<L extends Log = Log> extends Observable<L> {
   debug(message: string): void;
 
   /**
+   * Logs a debug message using quick tag formatting
+   */
+  debug(strings: TemplateStringsArray, ...args: QuickConst[]): void;
+
+  /**
    * Logs a verbose message
    */
   verbose(message: string): void;
+
+  /**
+   * Logs a verbose message using quick tag formatting
+   */
+  verbose(strings: TemplateStringsArray, ...args: QuickConst[]): void;
 
   /**
    * Logs an info message
@@ -64,12 +75,27 @@ export interface Logger<L extends Log = Log> extends Observable<L> {
   info(message: string): void;
 
   /**
+   * Logs an info message using quick tag formatting
+   */
+  info(strings: TemplateStringsArray, ...args: QuickConst[]): void;
+
+  /**
    * Logs a warn message
    */
   warning(message: string, error?: Error): void;
 
   /**
+   * Logs a warn message using quick tag formatting
+   */
+  warning(strings: TemplateStringsArray, ...args: QuickConst[]): void;
+
+  /**
    * Logs an error message
    */
   error(message: string, error?: Error): void;
+
+  /**
+   * Logs an error message using quick tag formatting
+   */
+  error(strings: TemplateStringsArray, ...args: QuickConst[]): void;
 }

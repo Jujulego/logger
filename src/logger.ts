@@ -1,6 +1,12 @@
 import { source$ } from '@jujulego/event-tree';
+import { qstr, QuickConst } from '@jujulego/quick-tag';
 
 import { Log, Logger, LogLevel, LogLevelKey, LogModifier as LM, parseLogLevel } from './defs/index.js';
+
+// Utils
+function isTmplStringArray(arr: unknown): arr is TemplateStringsArray {
+  return Array.isArray(arr);
+}
 
 // Builder
 export function logger$(): Logger;
@@ -31,10 +37,52 @@ export function logger$(...fns: LM[]): Logger {
     // log methods
     log: (level: LogLevel | LogLevelKey, message: string, error?: Error) => emit({ level: parseLogLevel(level), message, error }),
 
-    debug:   (message: string) => emit({ level: LogLevel.debug,   message }),
-    verbose: (message: string) => emit({ level: LogLevel.verbose, message }),
-    info:    (message: string) => emit({ level: LogLevel.info,    message }),
-    warning: (message: string, error?: Error) => emit({ level: LogLevel.warning, message, error }),
-    error:   (message: string, error?: Error) => emit({ level: LogLevel.error,   message, error }),
+    debug(message: string | TemplateStringsArray, ...args: QuickConst[]) {
+      if (isTmplStringArray(message)) {
+        message = qstr(message as TemplateStringsArray, ...args);
+      }
+
+      return emit({ level: LogLevel.debug, message });
+    },
+
+    verbose(message: string | TemplateStringsArray, ...args: QuickConst[]) {
+      if (isTmplStringArray(message)) {
+        message = qstr(message as TemplateStringsArray, ...args);
+      }
+
+      return emit({ level: LogLevel.verbose, message });
+    },
+
+    info(message: string | TemplateStringsArray, ...args: QuickConst[]) {
+      if (isTmplStringArray(message)) {
+        message = qstr(message as TemplateStringsArray, ...args);
+      }
+
+      return emit({ level: LogLevel.info, message });
+    },
+
+    warning(...args: [message: string, error?: Error | undefined] | [strings: TemplateStringsArray, ...QuickConst[]]) {
+      if (isTmplStringArray(args[0])) {
+        const [strings, ...rest] = args;
+
+        return emit({ level: LogLevel.warning, message: qstr(strings, ...(rest as QuickConst[])) });
+      } else {
+        const [message, error] = args;
+
+        return emit({ level: LogLevel.warning, message, error: error as Error });
+      }
+    },
+
+    error(...args: [message: string, error?: Error | undefined] | [strings: TemplateStringsArray, ...QuickConst[]]) {
+      if (isTmplStringArray(args[0])) {
+        const [strings, ...rest] = args;
+
+        return emit({ level: LogLevel.error, message: qstr(strings, ...(rest as QuickConst[])) });
+      } else {
+        const [message, error] = args;
+
+        return emit({ level: LogLevel.error, message, error: error as Error });
+      }
+    },
   });
 }
