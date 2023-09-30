@@ -1,3 +1,4 @@
+import chalk from 'chalk-template';
 import { vi } from 'vitest';
 
 import { logger$ } from '@/src/logger.js';
@@ -26,6 +27,6 @@ describe('toConsole', () => {
     logger.info('life');
 
     // eslint-disable-next-line no-console
-    expect(console.log).toHaveBeenCalledWith('today - [test] life');
+    expect(console.log).toHaveBeenCalledWith(chalk`{grey today - }[test] life`);
   });
 });

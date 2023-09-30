@@ -1,13 +1,17 @@
-import { qfun, qprop, QuickFun } from '@jujulego/quick-tag';
+import { qprop, QuickFun } from '@jujulego/quick-tag';
+import chalkTemplate from 'chalk-template';
+import chalk from 'chalk';
 
 import { LogLabel, LogTimestamp } from '../attributes/index.js';
 import { Log, LogLevel, LogTransport } from '../defs/index.js';
+import { quick } from '../quick.js';
 
 // Types
 export type ConsoleLog = Log & Partial<LogLabel & LogTimestamp>;
 
 // Format
-const defaultFormat = qfun<ConsoleLog>`#?:${qprop('timestamp')}#$ - ?##?:${qprop('label')}[#$] ?#${qprop('message')}`;
+const defaultFormat = quick.wrap(chalkTemplate)
+  .function<ConsoleLog>`#?:${qprop('timestamp')}{grey #$ - }?##?:${qprop('label')}[#$] ?#${qprop('message')}`;
 
 // Builder
 export function toConsole(): LogTransport<ConsoleLog>;
@@ -21,11 +25,11 @@ export function toConsole(format: QuickFun<Log> = defaultFormat): LogTransport<L
 
       switch (log.level) {
         case LogLevel.error:
-          console.error(message);
+          console.error(chalk.red(message));
           break;
 
         case LogLevel.warning:
-          console.warn(message);
+          console.warn(chalk.yellow(message));
           break;
 
         case LogLevel.info:
