@@ -1,9 +1,9 @@
-import { qprop, QuickFun } from '@jujulego/quick-tag';
+import { qprop } from '@jujulego/quick-tag';
 import chalkTemplate from 'chalk-template';
 import chalk from 'chalk';
 
 import { LogLabel, LogTimestamp } from '../attributes/index.js';
-import { Log, LogLevel, LogTransport } from '../defs/index.js';
+import { Log, LogFormat, LogLevel, LogTransport } from '../defs/index.js';
 import { quick } from '../quick.js';
 
 // Types
@@ -16,9 +16,9 @@ const defaultFormat = quick.wrap(chalkTemplate)
 // Builder
 export function toConsole(): LogTransport<ConsoleLog>;
 
-export function toConsole<L extends Log>(format: QuickFun<L>): LogTransport<L>;
+export function toConsole<L extends Log>(format: LogFormat<L>): LogTransport<L>;
 
-export function toConsole(format: QuickFun<Log> = defaultFormat): LogTransport<Log> {
+export function toConsole(format: LogFormat = defaultFormat): LogTransport<Log> {
   return {
     next(log) {
       const message = format(log);

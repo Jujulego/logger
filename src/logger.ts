@@ -1,7 +1,8 @@
 import { Observable, source$ } from '@jujulego/event-tree';
-import { qstr, QuickConst } from '@jujulego/quick-tag';
+import { QuickConst } from '@jujulego/quick-tag';
 
 import { Log, LogLevel, LogLevelKey, LogModifier as LM, parseLogLevel } from './defs/index.js';
+import { quick } from './quick.js';
 
 // Types
 export type LeveledLogArgs = [message: string, error?: Error | undefined];
@@ -70,7 +71,7 @@ export class Logger<L extends Log = Log> implements Observable<L> {
     if (Array.isArray(args[0])) {
       const [strings, ...rest] = args as LeveledLogTagArgs;
 
-      this._next({ level, message: qstr(strings, ...rest) });
+      this._next({ level, message: quick.string(strings, ...rest) });
     } else {
       const [message, error] = args as LeveledLogArgs;
 
