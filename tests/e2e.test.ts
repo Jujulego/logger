@@ -1,7 +1,5 @@
 /* eslint-disable no-console */
 import { filter$, flow$ } from '@jujulego/aegis';
-import chalk from 'chalk';
-import chalkTemplate from 'chalk-template';
 import { vi } from 'vitest';
 
 import { logger$, LogLevel, toConsole, withLabel, withTimestamp } from '@/src/index.js';
@@ -39,21 +37,21 @@ it('should print a complete log but only with at least info level', () => {
 
   // Error level
   logger.error('test error');
-  expect(console.error).toHaveBeenCalledWith(chalk.red(chalkTemplate`{grey 2023-09-26T00:00:00.000Z - }[life] test error`));
+  expect(console.error).toHaveBeenCalledWith('[life] test error');
 
   // Warning level
   logger.warning('test warning');
-  expect(console.warn).toHaveBeenCalledWith(chalk.yellow(chalkTemplate`{grey 2023-09-26T00:00:00.000Z - }[life] test warning`));
+  expect(console.warn).toHaveBeenCalledWith('[life] test warning');
 
   // Info level
   logger.info('test info');
-  expect(console.log).toHaveBeenCalledWith(chalkTemplate`{grey 2023-09-26T00:00:00.000Z - }[life] test info`);
+  expect(console.log).toHaveBeenCalledWith('[life] test info');
 
   // Verbose level
   logger.verbose('test verbose');
-  expect(console.log).not.toHaveBeenCalledWith(chalkTemplate`{grey 2023-09-26T00:00:00.000Z - }[life] test verbose`);
+  expect(console.log).not.toHaveBeenCalledWith('[life] test verbose');
 
   // Debug level
   logger.error('test debug');
-  expect(console.debug).not.toHaveBeenCalledWith(chalkTemplate`{grey 2023-09-26T00:00:00.000Z - }[life] test debug`);
+  expect(console.debug).not.toHaveBeenCalledWith('[life] test debug');
 });

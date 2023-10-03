@@ -1,4 +1,3 @@
-import chalk from 'chalk-template';
 import { beforeEach, vi } from 'vitest';
 
 import { logger$ } from '@/src/logger.js';
@@ -70,13 +69,13 @@ describe('toConsole', () => {
     vi.spyOn(console, 'log').mockReturnValue();
 
     const logger = logger$(
-      (log) => ({ ...log, label: 'test', timestamp: 'today' })
+      (log) => ({ ...log, label: 'test' })
     );
     logger.subscribe(toConsole().next);
     logger.info('life');
 
     // eslint-disable-next-line no-console
-    expect(console.log).toHaveBeenCalledWith(chalk`{grey today - }[test] life`);
+    expect(console.log).toHaveBeenCalledWith('[test] life');
   });
 
   it('should print log and error in console', () => {

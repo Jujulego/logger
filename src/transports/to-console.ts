@@ -1,16 +1,14 @@
 import { qprop } from '@jujulego/quick-tag';
-import chalkTemplate from 'chalk-template';
 
-import { LogLabel, LogTimestamp } from '../attributes/index.js';
+import { LogLabel } from '../attributes/index.js';
 import { Log, LogFormat, LogLevel, LogTransport } from '../defs/index.js';
 import { quick } from '../quick.js';
 
 // Types
-export type ConsoleLog = Log & Partial<LogLabel & LogTimestamp>;
+export type ConsoleLog = Log & Partial<LogLabel>;
 
 // Format
-export const consoleFormat = quick.wrap(chalkTemplate)
-  .function<ConsoleLog>`#?:${qprop('timestamp')}{grey #$ - }?##?:${qprop('label')}[#$] ?#${qprop('message')}`;
+export const consoleFormat = quick.function<ConsoleLog>`#?:${qprop('label')}[#$] ?#${qprop('message')}`;
 
 // Builder
 export function toConsole(): LogTransport<ConsoleLog>;
