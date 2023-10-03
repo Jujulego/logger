@@ -29,4 +29,16 @@ describe('toConsole', () => {
     // eslint-disable-next-line no-console
     expect(console.log).toHaveBeenCalledWith(chalk`{grey today - }[test] life`);
   });
+
+  it('should print log and error in console', () => {
+    vi.spyOn(console, 'log').mockReturnValue();
+
+    const error = new Error('Failed !');
+    const logger = logger$();
+    logger.subscribe(toConsole().next);
+    logger.info('life', error);
+
+    // eslint-disable-next-line no-console
+    expect(console.log).toHaveBeenCalledWith('life', error);
+  });
 });
