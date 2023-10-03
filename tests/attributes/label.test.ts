@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 
-import { formatLabel, hasLabel, withLabel } from '@/src/attributes/label.js';
+import { hasLabel, withLabel } from '@/src/attributes/label.js';
 import { LogLevel } from '@/src/defs/log-level.js';
 import { logger$ } from '@/src/logger.js';
 
@@ -67,26 +67,5 @@ describe('withLabel', () => {
       label: 'second',
       message: 'life is 42'
     });
-  });
-});
-
-describe('formatLabel', () => {
-  it('should do nothing as log has no label', () => {
-    expect(formatLabel()({ level: LogLevel.info, message: 'message' }, 'message'))
-      .toBe('message');
-  });
-
-  it('should prepend message with label', () => {
-    expect(formatLabel()({ level: LogLevel.info, label: 'label', message: 'message' }, 'message'))
-      .toBe('[label] message');
-  });
-
-  it('should use fmt to format log label', () => {
-    const fmt = vi.fn((label) => `{${label}}`);
-
-    expect(formatLabel(fmt)({ level: LogLevel.info, label: 'label', message: 'message' }, 'message'))
-      .toBe('{label} message');
-
-    expect(fmt).toHaveBeenCalledWith('label');
   });
 });

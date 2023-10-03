@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 
-import { formatTimestamp, hasTimestamp, withTimestamp } from '@/src/attributes/timestamp.js';
+import { hasTimestamp, withTimestamp } from '@/src/attributes/timestamp.js';
 import { LogLevel } from '@/src/defs/log-level.js';
 import { logger$ } from '@/src/logger.js';
 
@@ -58,26 +58,5 @@ describe('withTimestamp', () => {
       timestamp: 'test',
       message: 'life is 42'
     });
-  });
-});
-
-describe('formatTimestamp', () => {
-  it('should do nothing as log has no timestamp', () => {
-    expect(formatTimestamp()({ level: LogLevel.info, message: 'message' }, 'message'))
-      .toBe('message');
-  });
-
-  it('should prepend message with timestamp', () => {
-    expect(formatTimestamp()({ level: LogLevel.info, timestamp: 'timestamp', message: 'message' }, 'message'))
-      .toBe('timestamp - message');
-  });
-
-  it('should use fmt to format log timestamp', () => {
-    const fmt = vi.fn((timestamp) => `{${timestamp}}`);
-
-    expect(formatTimestamp(fmt)({ level: LogLevel.info, timestamp: 'timestamp', message: 'message' }, 'message'))
-      .toBe('{timestamp} message');
-
-    expect(fmt).toHaveBeenCalledWith('timestamp');
   });
 });
