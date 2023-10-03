@@ -12,7 +12,6 @@ export const consoleFormat = quick.function<ConsoleLog>`#?:${qprop('label')}[#$]
 
 // Builder
 export function toConsole(): LogTransport<ConsoleLog>;
-
 export function toConsole<L extends Log>(format: LogFormat<L>): LogTransport<L>;
 
 export function toConsole(format: LogFormat = consoleFormat): LogTransport<Log> {

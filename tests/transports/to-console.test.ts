@@ -21,7 +21,7 @@ describe('toConsole', () => {
     expect(console.error).toHaveBeenCalledWith('life');
   });
 
-  it('should print info log using console.warn', () => {
+  it('should print warning log using console.warn', () => {
     vi.spyOn(console, 'warn').mockReturnValue();
 
     const logger = logger$();
@@ -65,7 +65,7 @@ describe('toConsole', () => {
     expect(console.debug).toHaveBeenCalledWith('life');
   });
 
-  it('should print log in console including label and timestamp', () => {
+  it('should print log in console including label', () => {
     vi.spyOn(console, 'log').mockReturnValue();
 
     const logger = logger$(

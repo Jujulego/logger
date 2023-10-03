@@ -1,10 +1,11 @@
 import { qprop } from '@jujulego/quick-tag';
 import chalkGlobal, { ChalkInstance, chalkStderr, ColorName } from 'chalk';
 import { makeTaggedTemplate } from 'chalk-template';
+import os from 'node:os';
 
 import { LogLabel, LogTimestamp } from '../attributes/index.js';
 import { Log, LogFormat, LogLevel, LogTransport } from '../defs/index.js';
-import { quick } from '../quick.js';
+import { qlogLevel, quick } from '../quick.js';
 
 // Types
 export type StreamLog = Log & Partial<LogLabel & LogTimestamp>;
@@ -18,7 +19,7 @@ export interface StreamOptions<L extends Log = Log> {
 
 // Format
 export const streamFormat = (chalk = chalkGlobal) => quick.wrap(makeTaggedTemplate(chalk))
-  .function<StreamLog>`#?:${qprop('timestamp')}{grey #$ - }?#${qprop('label')} - #?:${qprop('label')}[#$] ?#${qprop('message')}`;
+  .function<StreamLog>`#?:${qprop('timestamp')}{grey #$ - }?#${qlogLevel()} - #?:${qprop('label')}[#$] ?#${qprop('message')}`;
 
 export const streamColors: StreamColors = {
   [LogLevel.debug]: 'grey',
@@ -43,14 +44,18 @@ export function toStream(stream: NodeJS.WritableStream, opts: StreamOptions = {}
       let message = format(log);
 
       if (log.error) {
-        message = `${message}\n${log.error.name}: ${log.error.message}\n${log.error.stack}`;
+        if (log.error.stack) {
+          message += `${os.EOL}${log.error.stack}`;
+        } else {
+          message += `${os.EOL}${log.error.name}: ${log.error.message}`;
+        }
       }
 
       if (log.level in colors) {
         message = chalk[colors[log.level]!](message);
       }
 
-      stream.write(message);
+      stream.write(message + os.EOL);
     }
   };
 }
