@@ -432,7 +432,7 @@ __metadata:
     "@jujulego/aegis": 2.0.0-beta.5
     "@jujulego/event-tree": ^4.1.1
     "@jujulego/jill": 2.3.2
-    "@jujulego/quick-tag": ^0.3.2
+    "@jujulego/quick-tag": ^0.3.3
     "@microsoft/eslint-formatter-sarif": 3.0.0
     "@rollup/plugin-swc": 0.2.0
     "@swc/cli": 0.1.62
@@ -453,13 +453,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@jujulego/quick-tag@npm:^0.3.2":
-  version: 0.3.2
-  resolution: "@jujulego/quick-tag@npm:0.3.2"
+"@jujulego/quick-tag@npm:^0.3.3":
+  version: 0.3.3
+  resolution: "@jujulego/quick-tag@npm:0.3.3"
   dependenciesMeta:
     vitest@0.34.6:
       unplugged: true
-  checksum: b80206c4dc455e3b512de281d226de29d2fdc5018d4106944b6c2809f74bdd27dfca04607ce2cad7d800b14669bdbc7e509f437fd7fe5e447cc74be0e2fdd8e2
+  checksum: 4e92934a0cf8cc1dd783c42885067317b702826f1d4042a5a976802a67dc0bb6ac2784b23e3d2c97b0e0abece3d4d6720005b1f4be2db0a4dd6f64902057b2ee
   languageName: node
   linkType: hard
 

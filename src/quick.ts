@@ -5,6 +5,18 @@ import { Log, LogLevel } from './defs/index.js';
 // Logger quick instance
 export const quick = new Quick();
 
+// Commands
+quick.register({
+  name: 'error',
+  format(err) {
+    if (err instanceof Error && err.stack) {
+      return err.stack;
+    }
+
+    return err?.toString() ?? '';
+  }
+});
+
 // Utils
 export function qlogLevel(fixLength = true): QuickArg<Log> {
   return (log: Log) => {
