@@ -1,39 +1,46 @@
-import { formatLabel, formatTimestamp, LogLabel, LogTimestamp } from '../attributes/index.js';
+import { qprop } from '@jujulego/quick-tag';
+
+import { LogLabel } from '../attributes/index.js';
 import { Log, LogFormat, LogLevel, LogTransport } from '../defs/index.js';
-import { logFormat } from '../log-format.js';
+import { quick } from '../quick.js';
 
 // Types
-export type ConsoleLog = Log & Partial<LogLabel & LogTimestamp>;
+export type ConsoleLog = Log & Partial<LogLabel>;
 
 // Format
-export function consoleFormat(): LogFormat<ConsoleLog> {
-  return logFormat(formatLabel(), formatTimestamp());
-}
+export const consoleFormat = quick.function<ConsoleLog>`#?:${qprop('label')}[#$] ?#${qprop('message')}`;
 
 // Builder
-export function toConsole<L extends ConsoleLog>(format: LogFormat<L> = consoleFormat()): LogTransport<L> {
+export function toConsole(): LogTransport<ConsoleLog>;
+export function toConsole<L extends Log>(format: LogFormat<L>): LogTransport<L>;
+
+export function toConsole(format: LogFormat = consoleFormat): LogTransport<Log> {
   return {
     next(log) {
-      const message = format(log);
+      const args: unknown[] = [format(log)];
+
+      if (log.error) {
+        args.push(log.error);
+      }
 
       switch (log.level) {
         case LogLevel.error:
-          console.error(message);
+          console.error(...args);
           break;
 
         case LogLevel.warning:
-          console.warn(message);
+          console.warn(...args);
           break;
 
         case LogLevel.info:
         case LogLevel.verbose:
           // eslint-disable-next-line no-console
-          console.log(message);
+          console.log(...args);
           break;
 
         case LogLevel.debug:
           // eslint-disable-next-line no-console
-          console.debug(message);
+          console.debug(...args);
           break;
       }
     }

@@ -432,6 +432,7 @@ __metadata:
     "@jujulego/aegis": 2.0.0-beta.5
     "@jujulego/event-tree": ^4.1.1
     "@jujulego/jill": 2.3.3
+    "@jujulego/quick-tag": ^0.3.3
     "@microsoft/eslint-formatter-sarif": 3.0.0
     "@rollup/plugin-swc": 0.2.1
     "@swc/cli": 0.1.62
@@ -440,6 +441,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 6.7.4
     "@typescript-eslint/parser": 6.7.4
     "@vitest/coverage-v8": 0.34.6
+    chalk: ^5.3.0
+    chalk-template: ^1.1.0
     eslint: 8.51.0
     eslint-plugin-vitest: 0.3.2
     shx: 0.3.4
@@ -449,6 +452,16 @@ __metadata:
     vitest: 0.34.6
   languageName: unknown
   linkType: soft
+
+"@jujulego/quick-tag@npm:^0.3.3":
+  version: 0.3.3
+  resolution: "@jujulego/quick-tag@npm:0.3.3"
+  dependenciesMeta:
+    vitest@0.34.6:
+      unplugged: true
+  checksum: 4e92934a0cf8cc1dd783c42885067317b702826f1d4042a5a976802a67dc0bb6ac2784b23e3d2c97b0e0abece3d4d6720005b1f4be2db0a4dd6f64902057b2ee
+  languageName: node
+  linkType: hard
 
 "@jujulego/tasks@npm:^2.0.1":
   version: 2.0.1
@@ -1406,6 +1419,15 @@ __metadata:
     pathval: ^1.1.1
     type-detect: ^4.0.8
   checksum: 536668c60a0d985a0fbd94418028e388d243a925d7c5e858c7443e334753511614a3b6a124bac9ca077dfc4c37acc367d62f8c294960f440749536dc181dfc6d
+  languageName: node
+  linkType: hard
+
+"chalk-template@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "chalk-template@npm:1.1.0"
+  dependencies:
+    chalk: ^5.2.0
+  checksum: 868aae8d4e7556ad2f35de4e04fe65dbe1ea6c5c80ad783f1c156d0a5c33f444c6814f49cbb68fe348c78e99daf2bcf566b47ad7e13603e4691ca78b2f422824
   languageName: node
   linkType: hard
 
