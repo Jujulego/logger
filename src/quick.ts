@@ -1,4 +1,5 @@
 import { Quick, QuickArg } from '@jujulego/quick-tag';
+import path from 'node:path';
 
 import { Log, LogLevel } from './defs/index.js';
 
@@ -6,6 +7,17 @@ import { Log, LogLevel } from './defs/index.js';
 export const quick = new Quick();
 
 // Commands
+quick.register({
+  name: 'cwd',
+  format(val) {
+    if (typeof val === 'string') {
+      return path.relative(process.cwd(), val);
+    }
+
+    return val?.toString() ?? '';
+  }
+});
+
 quick.register({
   name: 'error',
   format(err) {
