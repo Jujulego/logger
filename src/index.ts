@@ -2,4 +2,5 @@ export * from './attributes/index.js';
 export * from './defs/index.js';
 export * from './formats/index.js';
 export * from './logger.js';
+export * from './quick.js';
 export * from './transports/index.js';
