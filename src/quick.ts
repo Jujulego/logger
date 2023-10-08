@@ -1,4 +1,4 @@
-import { Quick, QuickArg } from '@jujulego/quick-tag';
+import { Quick, QuickArg, QuickJsonCommand } from '@jujulego/quick-tag';
 import path from 'node:path';
 
 import { Log, LogLevel } from './defs/index.js';
@@ -7,6 +7,8 @@ import { Log, LogLevel } from './defs/index.js';
 export const quick = new Quick();
 
 // Commands
+quick.register(QuickJsonCommand);
+
 quick.register({
   name: 'cwd',
   format(val) {
