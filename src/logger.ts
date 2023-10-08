@@ -119,6 +119,8 @@ export class Logger<L extends Log = Log> implements Observable<L> {
     this._leveledLog(LogLevel.warning, args);
   }
 
+  warn = this.warning;
+
   /**
    * Logs a error message
    */
