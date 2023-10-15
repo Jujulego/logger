@@ -38,7 +38,7 @@
     "chalk-template": "^1.1.0"
   },
   "devDependencies": {
-    "@jujulego/aegis": "2.0.0-beta.5",
+    "@jujulego/aegis": "2.0.0-beta.6",
     "@jujulego/jill": "2.3.3",
     "@microsoft/eslint-formatter-sarif": "3.0.0",
     "@rollup/plugin-swc": "0.2.1",
