@@ -370,16 +370,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jujulego/aegis@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@jujulego/aegis@npm:2.0.0"
+"@jujulego/aegis@npm:2.0.1":
+  version: 2.0.1
+  resolution: "@jujulego/aegis@npm:2.0.1"
   dependencies:
     "@jujulego/event-tree": ^4.1.1
     "@jujulego/utils": ^2.0.0
   dependenciesMeta:
     vitest@0.34.5:
       unplugged: true
-  checksum: 600a05f58853bb69fe61b78431647ef9c07384e6cd7defa80bdc41e9631bc88d13d6a1618275b712fc93a2673decd89449826b4ce9525306564c0486517f6fa0
+  checksum: 155c6c2e16ccd7a04b94adb43dc343444d04e3cd9612379cf062a40c86b762b7359a8527b590e8487846d07b94c691723e09a6b8c4bdca5a0044ab256f22bf78
   languageName: node
   linkType: hard
 
@@ -429,7 +429,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@jujulego/logger@workspace:."
   dependencies:
-    "@jujulego/aegis": 2.0.0
+    "@jujulego/aegis": 2.0.1
     "@jujulego/event-tree": ^4.1.1
     "@jujulego/jill": 2.3.3
     "@jujulego/quick-tag": ^0.3.3
