@@ -38,7 +38,7 @@
     "chalk-template": "^1.1.0"
   },
   "devDependencies": {
-    "@jujulego/aegis": "2.0.1",
+    "@jujulego/aegis": "2.1.0",
     "@jujulego/jill": "2.3.5",
     "@jujulego/vite-plugin-swc": "1.1.0",
     "@microsoft/eslint-formatter-sarif": "3.0.0",
