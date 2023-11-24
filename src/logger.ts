@@ -1,5 +1,5 @@
-import { Observable, source$ } from '@jujulego/event-tree';
 import { QuickConst } from '@jujulego/quick-tag';
+import { Observable, source$ } from 'kyrielle';
 
 import { Log, LogLevel, LogLevelKey, LogModifier as LM, parseLogLevel } from './defs/index.js';
 import { quick } from './quick.js';

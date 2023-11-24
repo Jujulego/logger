@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import { filter$, flow$ } from '@jujulego/aegis';
+import { flow$ } from 'kyrielle/operators';
+import { filter$ } from 'kyrielle/steps';
 import { vi } from 'vitest';
 
 import { logger$, LogLevel, toConsole, withLabel, withTimestamp } from '@/src/index.js';
@@ -32,7 +33,7 @@ it('should print a complete log but only with at least info level', () => {
   flow$(
     logger,
     filter$((log) => log.level >= LogLevel.info),
-    toConsole(),
+    toConsole()
   );
 
   // Error level

@@ -1,7 +1,7 @@
 import { qprop } from '@jujulego/quick-tag';
 
 import { LogLabel } from '../attributes/index.js';
-import { Log, LogFormat, LogLevel, LogTransport } from '../defs/index.js';
+import { Log, LogFormat, LogLevel, LogReceiver } from '../defs/index.js';
 import { quick } from '../quick.js';
 
 // Types
@@ -11,10 +11,10 @@ export type ConsoleLog = Log & Partial<LogLabel>;
 export const consoleFormat = quick.function<ConsoleLog>`#?:${qprop('label')}[#$] ?#${qprop('message')}`;
 
 // Builder
-export function toConsole(): LogTransport<ConsoleLog>;
-export function toConsole<L extends Log>(format: LogFormat<L>): LogTransport<L>;
+export function toConsole(): LogReceiver<ConsoleLog>;
+export function toConsole<L extends Log>(format: LogFormat<L>): LogReceiver<L>;
 
-export function toConsole(format: LogFormat = consoleFormat): LogTransport<Log> {
+export function toConsole(format: LogFormat = consoleFormat): LogReceiver<Log> {
   return {
     next(log) {
       const args: unknown[] = [format(log)];

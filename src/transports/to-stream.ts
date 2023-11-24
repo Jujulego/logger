@@ -4,7 +4,7 @@ import { makeTaggedTemplate } from 'chalk-template';
 import os from 'node:os';
 
 import { LogLabel, LogTimestamp } from '../attributes/index.js';
-import { Log, LogFormat, LogLevel, LogTransport } from '../defs/index.js';
+import { Log, LogFormat, LogLevel, LogReceiver } from '../defs/index.js';
 import { qlevelColor } from '../formats/index.js';
 import { qlogLevel, quick } from '../quick.js';
 
@@ -27,10 +27,10 @@ export const streamColors: StreamColors = {
 };
 
 // Builder
-export function toStream(stream: NodeJS.WritableStream): LogTransport<StreamLog>;
-export function toStream<L extends Log>(stream: NodeJS.WritableStream, format?: LogFormat<L>): LogTransport<L>;
+export function toStream(stream: NodeJS.WritableStream): LogReceiver<StreamLog>;
+export function toStream<L extends Log>(stream: NodeJS.WritableStream, format?: LogFormat<L>): LogReceiver<L>;
 
-export function toStream(stream: NodeJS.WritableStream, format: LogFormat = streamFormat()): LogTransport<Log> {
+export function toStream(stream: NodeJS.WritableStream, format: LogFormat = streamFormat()): LogReceiver<Log> {
   // Build transport
   return {
     next(log) {
@@ -40,10 +40,10 @@ export function toStream(stream: NodeJS.WritableStream, format: LogFormat = stre
 }
 
 // Alias
-export function toStdout<L extends Log = Log>(format?: LogFormat<L>): LogTransport<L> {
+export function toStdout<L extends Log = Log>(format?: LogFormat<L>): LogReceiver<L> {
   return toStream(process.stdout, format);
 }
 
-export function toStderr<L extends Log = Log>(format: LogFormat<L> = streamFormat(chalkStderr)): LogTransport<L> {
+export function toStderr<L extends Log = Log>(format: LogFormat<L> = streamFormat(chalkStderr)): LogReceiver<L> {
   return toStream(process.stderr, format);
 }
