@@ -1,5 +1,5 @@
 import { QuickConst } from '@jujulego/quick-tag';
-import { Observable, source$ } from 'kyrielle';
+import { Source, source$ } from 'kyrielle';
 
 import { Log, LogLevel, LogLevelKey, LogModifier as LM, parseLogLevel } from './defs/index.js';
 import { quick } from './quick.js';
@@ -25,7 +25,7 @@ export function logger$(...fns: LM[]): Logger {
 }
 
 // Class
-export class Logger<L extends Log = Log> implements Observable<L> {
+export class Logger<L extends Log = Log> implements Source<L> {
   // Attributes
   private readonly _source = source$<L>();
   private readonly _modifier: LM<Log, L>;
@@ -36,8 +36,7 @@ export class Logger<L extends Log = Log> implements Observable<L> {
   }
 
   // Methods
-  private readonly _next = (log: Log) => this._source.next(this._modifier(log));
-
+  readonly next = (log: Log) => this._source.next(this._modifier(log));
   readonly subscribe = this._source.subscribe;
   readonly unsubscribe = this._source.unsubscribe;
   readonly clear = this._source.clear;
@@ -55,7 +54,7 @@ export class Logger<L extends Log = Log> implements Observable<L> {
 
   child(...fns: LM[]) {
     const child = logger$(...fns);
-    child.subscribe(this._next);
+    child.subscribe(this.next);
 
     return child;
   }
@@ -64,18 +63,18 @@ export class Logger<L extends Log = Log> implements Observable<L> {
    * Sends a log with a custom level
    */
   log(level: LogLevel | LogLevelKey, message: string, error?: Error): void {
-    this._next({ level: parseLogLevel(level), message, error });
+    this.next({ level: parseLogLevel(level), message, error });
   }
 
   private _leveledLog(level: LogLevel, args: LeveledLogArgs | LeveledLogTagArgs): void {
     if (Array.isArray(args[0])) {
       const [strings, ...rest] = args as LeveledLogTagArgs;
 
-      this._next({ level, message: quick.string(strings, ...rest) });
+      this.next({ level, message: quick.string(strings, ...rest) });
     } else {
       const [message, error] = args as LeveledLogArgs;
 
-      this._next({ level, message, error });
+      this.next({ level, message, error });
     }
   }
 
