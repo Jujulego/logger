@@ -14,7 +14,7 @@ beforeEach(() => {
 describe('jsonFormat', () => {
   it('should format object as one line json', () => {
     expect(format({ level: LogLevel.info,  message: 'test' }))
-      .toMatchInlineSnapshot('"{\\"level\\":2,\\"message\\":\\"test\\"}"');
+      .toMatchInlineSnapshot('"{"level":2,"message":"test"}"');
   });
 
   it('should format object containing error as one line json', () => {
@@ -22,6 +22,6 @@ describe('jsonFormat', () => {
     Object.assign(error, { stack: 'test stack' });
 
     expect(format({ level: LogLevel.error,  message: 'test', error }))
-      .toMatchInlineSnapshot('"{\\"level\\":4,\\"message\\":\\"test\\",\\"error\\":{\\"stack\\":\\"test stack\\",\\"message\\":\\"Test\\"}}"');
+      .toMatchInlineSnapshot('"{"level":4,"message":"test","error":{"stack":"test stack","message":"Test"}}"');
   });
 });
