@@ -23,7 +23,7 @@ quick.register({
 quick.register({
   name: 'error',
   format(err) {
-    if (err instanceof Error && err.stack) {
+    if (err && typeof err === 'object' && 'stack' in err && typeof err.stack === 'string') {
       return err.stack;
     }
 
