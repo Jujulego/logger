@@ -10,7 +10,7 @@ export type WithLabelModifier<L extends Log> = LogModifier<L, WithLabel<L>>;
 
 // Utils
 export function hasLabel<L extends Log>(log: L): log is WithLabel<L> {
-  return 'label' in log;
+  return typeof log.label === 'string';
 }
 
 // Modifier
