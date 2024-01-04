@@ -1,4 +1,4 @@
-import { filter$ } from 'kyrielle/steps';
+import { filter$ } from 'kyrielle/pipe';
 import process from 'node:process';
 
 import { Log, LogLevel } from '../defs/index.js';

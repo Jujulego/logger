@@ -1,5 +1,6 @@
 import { QuickConst } from '@jujulego/quick-tag';
-import { Source, source$ } from 'kyrielle';
+import { Source } from 'kyrielle';
+import { source$ } from 'kyrielle/events';
 
 import { Log, LogLevel, LogLevelKey, LogModifier as LM, parseLogLevel } from './defs/index.js';
 import { quick } from './quick.js';

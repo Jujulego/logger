@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, Mock, vi } from 'vitest';
-import { Source, source$ } from 'kyrielle';
-import { pipe$ } from 'kyrielle/operators';
+import { Source } from 'kyrielle';
+import { source$ } from 'kyrielle/events';
+import { pipe$ } from 'kyrielle/pipe';
 import process from 'node:process';
 
 import { LogLabel } from '@/src/attributes/label.js';

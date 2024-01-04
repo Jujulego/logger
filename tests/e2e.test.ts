@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
-import { flow$ } from 'kyrielle/operators';
-import { filter$ } from 'kyrielle/steps';
-import { vi } from 'vitest';
+import { filter$, flow$ } from 'kyrielle/pipe';
+import { beforeEach, expect, it, vi } from 'vitest';
 
 import { logger$, LogLevel, toConsole, withLabel, withTimestamp } from '@/src/index.js';
 
