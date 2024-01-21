@@ -1,4 +1,4 @@
-import { qstr, QuickConst } from '@jujulego/quick-tag';
+import { qstr, QuickRenderArg } from '@jujulego/quick-tag';
 import { Source } from 'kyrielle';
 import { source$ } from 'kyrielle/events';
 
@@ -6,7 +6,7 @@ import { Log, LogLevel, LogLevelKey, LogModifier as LM, parseLogLevel } from './
 
 // Types
 export type LeveledLogArgs = [message: string, error?: Error | undefined];
-export type LeveledLogTagArgs = [strings: TemplateStringsArray, ...args: QuickConst[]];
+export type LeveledLogTagArgs = [strings: TemplateStringsArray, ...args: QuickRenderArg[]];
 
 // Builder
 /**
@@ -82,7 +82,7 @@ export class Logger<L extends Log = Log> implements Source<L> {
    * Logs a debug message
    */
   debug(message: string, error?: Error): void;
-  debug(strings: TemplateStringsArray, ...args: QuickConst[]): void;
+  debug(strings: TemplateStringsArray, ...args: QuickRenderArg[]): void;
 
   debug(...args: LeveledLogArgs | LeveledLogTagArgs): void {
     this._leveledLog(LogLevel.debug, args);
@@ -92,7 +92,7 @@ export class Logger<L extends Log = Log> implements Source<L> {
    * Logs a verbose message
    */
   verbose(message: string, error?: Error): void;
-  verbose(strings: TemplateStringsArray, ...args: QuickConst[]): void;
+  verbose(strings: TemplateStringsArray, ...args: QuickRenderArg[]): void;
 
   verbose(...args: LeveledLogArgs | LeveledLogTagArgs): void {
     this._leveledLog(LogLevel.verbose, args);
@@ -102,7 +102,7 @@ export class Logger<L extends Log = Log> implements Source<L> {
    * Logs a info message
    */
   info(message: string, error?: Error): void;
-  info(strings: TemplateStringsArray, ...args: QuickConst[]): void;
+  info(strings: TemplateStringsArray, ...args: QuickRenderArg[]): void;
 
   info(...args: LeveledLogArgs | LeveledLogTagArgs): void {
     this._leveledLog(LogLevel.info, args);
@@ -112,7 +112,7 @@ export class Logger<L extends Log = Log> implements Source<L> {
    * Logs a warning message
    */
   warning(message: string, error?: Error): void;
-  warning(strings: TemplateStringsArray, ...args: QuickConst[]): void;
+  warning(strings: TemplateStringsArray, ...args: QuickRenderArg[]): void;
 
   warning(...args: LeveledLogArgs | LeveledLogTagArgs): void {
     this._leveledLog(LogLevel.warning, args);
@@ -124,7 +124,7 @@ export class Logger<L extends Log = Log> implements Source<L> {
    * Logs a error message
    */
   error(message: string, error?: Error): void;
-  error(strings: TemplateStringsArray, ...args: QuickConst[]): void;
+  error(strings: TemplateStringsArray, ...args: QuickRenderArg[]): void;
 
   error(...args: LeveledLogArgs | LeveledLogTagArgs): void {
     this._leveledLog(LogLevel.error, args);
