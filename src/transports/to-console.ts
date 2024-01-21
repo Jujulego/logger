@@ -1,17 +1,12 @@
-import { qprop } from '@jujulego/quick-tag';
+import { q$, qfun, qprop } from '@jujulego/quick-tag';
 
-import { LogLabel } from '../attributes/index.js';
 import { Log, LogFormat, LogLevel, LogReceiver } from '../defs/index.js';
-import { quick } from '../quick.js';
-
-// Types
-export type ConsoleLog = Log & Partial<LogLabel>;
 
 // Format
-export const consoleFormat = quick.function<ConsoleLog>`#?:${qprop('label')}[#$] ?#${qprop('message')}`;
+export const consoleFormat = qfun<Log>`#?:${qprop('label')}[${q$}] ?#${qprop('message')}`;
 
 // Builder
-export function toConsole(): LogReceiver<ConsoleLog>;
+export function toConsole(): LogReceiver<Log>;
 export function toConsole<L extends Log>(format: LogFormat<L>): LogReceiver<L>;
 
 export function toConsole(format: LogFormat = consoleFormat): LogReceiver<Log> {
