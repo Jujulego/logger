@@ -1,9 +1,8 @@
-import { QuickConst } from '@jujulego/quick-tag';
+import { qstr, QuickConst } from '@jujulego/quick-tag';
 import { Source } from 'kyrielle';
 import { source$ } from 'kyrielle/events';
 
 import { Log, LogLevel, LogLevelKey, LogModifier as LM, parseLogLevel } from './defs/index.js';
-import { quick } from './quick.js';
 
 // Types
 export type LeveledLogArgs = [message: string, error?: Error | undefined];
@@ -71,7 +70,7 @@ export class Logger<L extends Log = Log> implements Source<L> {
     if (Array.isArray(args[0])) {
       const [strings, ...rest] = args as LeveledLogTagArgs;
 
-      this.next({ level, message: quick.string(strings, ...rest) });
+      this.next({ level, message: qstr(strings, ...rest) });
     } else {
       const [message, error] = args as LeveledLogArgs;
 

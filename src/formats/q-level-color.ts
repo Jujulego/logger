@@ -4,17 +4,15 @@ import chalkGlobal, { ChalkInstance, ColorName } from 'chalk';
 import { Log, LogLevel } from '../defs/index.js';
 
 // Types
-export type QLevelColors = Partial<Record<LogLevel, ColorName>>;
+export type QLevelColor = Partial<Record<LogLevel, ColorName>>;
 
 export interface QLevelColorOpts {
   chalk?: ChalkInstance;
-  colors?: QLevelColors;
+  colors?: QLevelColor;
 }
 
 // Utils
-export function qlevelColor<L extends Log = Log>(fun: QuickFun<L>, opts?: QLevelColorOpts): QuickFun<L>;
-
-export function qlevelColor<L extends Log>(arg: QuickFun<L>, opts: QLevelColorOpts = {}): QuickFun<L> {
+export function qLevelColor<L extends Log = Log>(fun: QuickFun<L>, opts: QLevelColorOpts = {}): QuickFun<L> {
   // Parse options
   const chalk = opts.chalk ?? chalkGlobal;
   const colors = opts.colors ?? {
@@ -36,5 +34,5 @@ export function qlevelColor<L extends Log>(arg: QuickFun<L>, opts: QLevelColorOp
   }
 
   // Wrap
-  return (log: L) => addColor(log, arg(log));
+  return (log: L) => addColor(log, fun(log));
 }

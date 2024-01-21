@@ -13,7 +13,7 @@ export interface QLogLevelOpts {
 /**
  * Injects log's level name
  */
-export const qlogLevel = defineQuickFormat((log: Log, opts: QLogLevelOpts = {}) => {
+export const qLogLevel = defineQuickFormat((log: Log, opts: QLogLevelOpts = {}) => {
   const { fixLength = true } = opts;
   let level = LogLevel[log.level];
 
