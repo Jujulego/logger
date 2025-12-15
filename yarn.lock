@@ -486,7 +486,7 @@ __metadata:
     "@types/node": "npm:18.19.130"
     "@typescript-eslint/eslint-plugin": "npm:6.21.0"
     "@typescript-eslint/parser": "npm:6.21.0"
-    "@vitest/coverage-v8": "npm:1.6.0"
+    "@vitest/coverage-v8": "npm:1.6.1"
     chalk: "npm:^5.3.0"
     chalk-template: "npm:^1.1.0"
     eslint: "npm:8.57.0"
@@ -1222,9 +1222,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-v8@npm:1.6.0":
-  version: 1.6.0
-  resolution: "@vitest/coverage-v8@npm:1.6.0"
+"@vitest/coverage-v8@npm:1.6.1":
+  version: 1.6.1
+  resolution: "@vitest/coverage-v8@npm:1.6.1"
   dependencies:
     "@ampproject/remapping": "npm:^2.2.1"
     "@bcoe/v8-coverage": "npm:^0.2.3"
@@ -1240,8 +1240,8 @@ __metadata:
     strip-literal: "npm:^2.0.0"
     test-exclude: "npm:^6.0.0"
   peerDependencies:
-    vitest: 1.6.0
-  checksum: a7beaf2a88b628a9dc16ddca7589f2b2e4681598e6788d68423dffbb06c608edc52b2dd421ada069eb3cfd83f8f592ddd6e8b8db2d037bf13965a56c5e5835ac
+    vitest: 1.6.1
+  checksum: 2e88903e6487d3ddfcffcb12fdf3796d8e30f3c0db6ae3bbc8670652c9b8c890202bdb9bdc057a288ff8948e11e25bbd2d42f231cb6674fa2c826fc07377b5fc
   languageName: node
   linkType: hard
 
